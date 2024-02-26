@@ -24,10 +24,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         //
         $this->registerPolicies();
+        Passport::tokensExpireIn(now()->addDays(1));
+        Passport::refreshTokensExpireIn(now()->addDays(30));
+        Passport::personalAccessTokensExpireIn(now()->addMonths(6));
 
-        if(!$this->app->routesAreCached()){
-            Passport::routes();
-        }
+        // Passport::useTokenModel(Token::class);
+        // Passport::useClientModel(Client::class);
+        // Passport::useAuthCodeModel(AuthCode::class);
+        // Passport::usePersonalAccessClientModel(PersonalAccessClient::class);
+        // // if(!$this->app->routesAreCached()){
+        // //     Passport::routes();
+        // // }
 
     }
 }
